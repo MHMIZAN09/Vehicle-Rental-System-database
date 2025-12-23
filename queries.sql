@@ -65,6 +65,7 @@ insert into bookings (user_id,vehicle_id,start_date,end_date,status,total_cost) 
 -- Query 1: JOIN
 -- Requirement: Retrieve booking information along with Customer name and Vehicle name.
 
+-- Explanation:INNER JOIN is used to combine data from bookings, users, and vehicles. Only records with valid relationships in all tables are returned.
 SELECT 
     b.booking_id,
     u.name AS customer_name,
@@ -81,7 +82,7 @@ INNER JOIN vehicles AS v
 -- Query 2: EXISTS
 -- Requirement: Find all vehicles that have never been booked.
 
-
+-- Explanation: The NOT EXISTS clause is used to filter vehicles that do not have any corresponding entries in the bookings table.
 
 SELECT 
     v.vehicle_id,
@@ -106,6 +107,7 @@ WHERE NOT EXISTS (
 -- Query 3: WHERE
 -- Requirement: Retrieve all available vehicles of a specific type (e.g. cars).
 
+-- Explanation: The WHERE clause filters vehicles based on type and availability status.
 SELECT
   vehicle_id,
   name,
@@ -123,6 +125,7 @@ WHERE
 -- Query 4: GROUP BY and HAVING
 -- Requirement: Find the total number of bookings for each vehicle and display only those vehicles that have more than 2 bookings.
 
+-- Explanation: GROUP BY is used to aggregate bookings by vehicle name, and HAVING filters the results to include only those with more than 2 bookings.
 SELECT
   v.name as vehicle_name,
   count(b.booking_id) as total_bookings
